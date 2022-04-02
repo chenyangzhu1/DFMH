@@ -56,8 +56,6 @@ for ii=1:length(nbits_set)
         end
         B_tst = H'*U_W >0;
         
-        % B_tst = ttfea{2}'*W_bar{2}>0;
-        
         WtrueTestTraining = bsxfun(@eq, ttgnd, trgnd');
 
         %% Evaluation
