@@ -68,64 +68,7 @@ for ii=1:length(nbits_set)
         [~, orderH] = sort(DHamm, 2);
         MAP = calcMAP(orderH, WtrueTestTraining);
         fprintf('iter = %d, Bits: %d, MAP: %.4f...   \n', n_iters, nbits, MAP);
-
-%         hammRadius = 2;
-%         % hash lookup: precision and reall
-%         Ret = (DHamm <= hammRadius+0.00001);
-%         [PreR2, Rec] = evaluate_macro(WtrueTestTraining, Ret);
-%         fprintf('Iters = %d, Bits: %d, Pre@Radius2: %.4f...   \n', n_iters, nbits, PreR2);
-% 
-%         topK_MAP = 5000;
-%         topKmap = fastMAP(WtrueTestTraining, orderH', topK_MAP);
-%         fprintf('Iters = %d, Bits: %d, topK@5000: %.4f...   \n',n_iters, nbits, topKmap);
-% 
-%         Y = sparse(1:length(trgnd), double(trgnd),1); Y = full(Y);
-%         Ytt = sparse(1:length(ttgnd), double(ttgnd),1); Ytt = full(Ytt);
-% 
-%         top_NDCG = 100;
-%         ndcg = NDCG_k(Y', Ytt',orderH',top_NDCG);
-%         fprintf('Iters = %d, Bits: %d, NDCG_100: %.4f...   \n',n_iters, nbits, ndcg);
-
-        pos = [1:10:40 50:50:1000];
-        [rec_pos, pres_pos] = recall_precision5(WtrueTestTraining, DHamm, pos);
-
-        [recall, precision, ~] = recall_precision(WtrueTestTraining, DHamm);
-        [MAP1] = area_RP(recall, precision);
-%         fprintf('Iters = %d, Bits: %d, MAP1: %.4f...   \n',n_iters, nbits, MAP1);
-        
-        name = ['./Results/DFMH_'  dataname '_nbit_' num2str(nbits) '_' num2str(n_iters)];
-%         save(name,'MAP','MAP1','PreR2','recall', 'precision','rec_pos','pres_pos','topKmap','ndcg','WtrueTestTraining','B1','B2','trtime')
-        save(name,'MAP','MAP1','recall', 'precision','rec_pos','pres_pos','WtrueTestTraining','B1','B2','trtime')
-       
-%         % Store all data
-%         mapMat(n_iters) = MAP;
-%         map1Mat(n_iters) = MAP1;
-%         PreR2Mat(n_iters) = PreR2;
-%         topKmapMat(n_iters) = topKmap;
-%         ndcgMat(n_iters) = ndcg;
-%         recposMat(n_iters,:) = rec_pos;
-%         presposMat(n_iters,:) = pres_pos;
-%         recallMat(n_iters,:) = recall;
-%         precisionMat(n_iters,:) = precision;
-
-        clear recall precision MAP rec_pos pres_pos
+  
 end
-    
-% Store all data
 
-% [~,indx] = max(mapMat);
-% MAP = mapMat(indx);
-% MAP1 = map1Mat(indx);
-% PreR2 = PreR2Mat(indx);
-% topKmap = topKmapMat(indx);
-% ndcg = ndcgMat(indx);
-% rec_pos = recposMat(indx,:);
-% pres_pos = presposMat(indx,:);
-% recall = recallMat(indx,:);
-% precision = precisionMat(indx,:);
-% clear mapMat map1Mat PreR2Mat topKmapMat ndcgMat recposMat presposMat recallMat precisionMat
-% 
-% name = ['./Results/ours_'  dataname '_nbit_' num2str(nbits) '_' num2str(myiter)];
-% save(name,'MAP','MAP1','PreR2','recall', 'precision','rec_pos','pres_pos','topKmap','ndcg','WtrueTestTraining','B1','B2','trtime')
-% 
 end
