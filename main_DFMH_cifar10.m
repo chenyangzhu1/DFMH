@@ -43,7 +43,6 @@ for ii=1:length(nbits_set)
         pars.beta       = 10; % parameters\lambda.5
         pars.gamma    = 0.01; % parameters\gamma1000
         pars.lambda = 0.1;% parameters\eta.1
-%         pars.theta  = .1;
         pars.Iter_num = 4;
         pars.nbits    = nbits;
         pars.r = 3;
