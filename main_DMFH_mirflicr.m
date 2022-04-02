@@ -3,10 +3,7 @@ clear;clear memory;
 addpath('./tools')
 % dataname = 'mirflickr';
 nbits_set = [32];%[8,16,32,48,64,96,128];
-%REUSLT 5
-% load('mirflickr.mat')
 dataname = {'mirflickr'};%[iaprtc12,pascal07,espgame,Corel5k];
-% dataname = {'mirflickr', 'pascal07', 'iaprtc12', 'espgame', 'Corel5k'};
 for i=1:size(dataname,2)  
 load([dataname{i} '.mat']);
 fprintf([ dataname{i} ' dataset loaded...\n']);
@@ -51,7 +48,6 @@ for ii=1:length(nbits_set)
         pars.beta       = 10; % parameters\lambda.5
         pars.gamma    = 0.01; % parameters\gamma1000
         pars.lambda = 0.1;% parameters\eta.1
-%         pars.theta  = .1;
         pars.Iter_num = 4;
         pars.nbits    = nbits;
         pars.r = 3;
@@ -82,16 +78,6 @@ for ii=1:length(nbits_set)
 		[~, orderH] = sort(DHamm, 2);
 		MAP = calcMAP(orderH, WtrueTestTraining);
 		fprintf('iter = %d, Bits: %d, MAP: %.4f...   \n', n_iters, nbits, MAP);
-
-		pos = [1:10:40 50:50:1000];
-		[rec_pos, pres_pos] = recall_precision5(WtrueTestTraining, DHamm, pos);
-
-		[recall, precision, ~] = recall_precision(WtrueTestTraining, DHamm);
-		[MAP1] = area_RP(recall, precision);
-		%fprintf('Iters = %d, Bits: %d, MAP1: %.4f...   \n',n_iters, nbits, MAP1);
-
-		name = ['./Results/DFMH_'  dataname{i} '_nbit_' num2str(nbits) '_' num2str(n_iters)];
- 		save(name,'MAP','MAP1','recall', 'precision','rec_pos','pres_pos','WtrueTestTraining','B1','B2','trtime')
 end
 end
 end
