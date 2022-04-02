@@ -61,7 +61,6 @@ tic;
 %training
 for iter = 1:Iter_num
     fprintf('The %d-th iteration...\n',iter);
-    B0 = B;
     alpha_r = alpha.^r;
     [~,dim_y]=size(Y*Y');
         
